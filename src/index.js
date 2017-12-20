@@ -4,7 +4,8 @@ const asciidoctor = require("asciidoctor.js")();
 
 // config defaults
 const defaults = {
-  pattern: "**/*.adoc"
+  pattern: "**/*.adoc",
+  options: {}
 };
 
 // the plugin
@@ -28,7 +29,7 @@ const plugin = options => {
         const data = files[inputName];
 
         // render to HTML
-        const html = asciidoctor.convert(data.contents.toString());
+        const html = asciidoctor.convert(data.contents.toString(), config.options);
         data.contents = new Buffer(html);
 
         // get output name
