@@ -33,7 +33,11 @@ const plugin = options => {
         data.contents = new Buffer(html);
 
         // get output name
-        const outputName = path.basename(inputName, path.extname(inputName)) + ".html";
+        const directory = path.dirname(inputName);
+        let outputName = path.basename(inputName, path.extname(inputName)) + ".html";
+        if(directory !== ".") {
+          outputName = directory + "/" + outputName;
+        }
         
         // replace Asciidoc with HTML file
         delete files[inputName];

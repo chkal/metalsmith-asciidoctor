@@ -25,6 +25,23 @@ describe("All tests", () => {
 
   });
 
+  it("Should render file in subdir", testDone => {
+
+    const metalsmith = Metalsmith(path.join(__dirname, "fixture"))
+      .use(asciidoctor())
+      .use((files, metalsmith, pluginDone) => {
+
+        // HTML file is created and AsciiDoc file removed
+        expect(files).to.have.property("dir/file.html");
+        expect(files).not.to.have.property("dir/file.adoc");
+
+        pluginDone();
+      });
+
+    metalsmith.build(err => testDone(err));
+
+  });
+
   it("Should apply custom pattern", testDone => {
     
     const metalsmith = Metalsmith(path.join(__dirname, "fixture"))
