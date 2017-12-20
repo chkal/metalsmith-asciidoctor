@@ -12,11 +12,11 @@ describe("All tests", () => {
       .use((files, metalsmith, pluginDone) => {
 
         // HTML file is created and AsciiDoc file removed
-        expect(files).to.have.property("index.html");
-        expect(files).not.to.have.property("index.adoc");
+        expect(files).to.have.property("simple.html");
+        expect(files).not.to.have.property("simple.adoc");
 
         // check file contents
-        expect(files["index.html"].contents.toString()).to.have.string("Hello <strong>World</strong>");
+        expect(files["simple.html"].contents.toString()).to.have.string("Hello <strong>World</strong>");
         
         pluginDone();
       });
@@ -34,8 +34,8 @@ describe("All tests", () => {
       .use((files, metalsmith, pluginDone) => {
 
         // file is not rendered because pattern does not match
-        expect(files).not.to.have.property("index.html");
-        expect(files).to.have.property("index.adoc");
+        expect(files).not.to.have.property("simple.html");
+        expect(files).to.have.property("simple.adoc");
 
         pluginDone();
       });
