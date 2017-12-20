@@ -24,5 +24,24 @@ describe("All tests", () => {
     metalsmith.build(err => testDone(err));
 
   });
-  
+
+  it("Should apply custom pattern", testDone => {
+    
+    const metalsmith = Metalsmith(path.join(__dirname, "fixture"))
+      .use(asciidoctor({
+        pattern: "*.does-not-exist"
+      }))
+      .use((files, metalsmith, pluginDone) => {
+
+        // file is not rendered because pattern does not match
+        expect(files).not.to.have.property("index.html");
+        expect(files).to.have.property("index.adoc");
+
+        pluginDone();
+      });
+
+    metalsmith.build(err => testDone(err));
+
+  });
+    
 });
