@@ -13,7 +13,7 @@ const plugin = options => {
 
   // build effective configuration
   const config = Object.assign({}, defaults, options);
-  
+
   // plugin function
   return (files, metalsmith, done) => {
 
@@ -35,10 +35,10 @@ const plugin = options => {
         // get output name
         const directory = path.dirname(inputName);
         let outputName = path.basename(inputName, path.extname(inputName)) + ".html";
-        if(directory !== ".") {
+        if (directory !== ".") {
           outputName = directory + "/" + outputName;
         }
-        
+
         // replace Asciidoc with HTML file
         delete files[inputName];
         files[outputName] = data;
