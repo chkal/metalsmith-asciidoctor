@@ -1,6 +1,6 @@
 const path = require("path");
 const minimatch = require("minimatch");
-const asciidoctor = require("asciidoctor.js")();
+const asciidoctor = require("asciidoctor")();
 
 // config defaults
 const defaults = {
@@ -30,7 +30,7 @@ const plugin = options => {
 
         // render to HTML
         const html = asciidoctor.convert(data.contents.toString(), config.options);
-        data.contents = new Buffer(html);
+        data.contents = Buffer.from(html);
 
         // get output name
         const directory = path.dirname(inputName);
